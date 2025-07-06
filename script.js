@@ -36,20 +36,29 @@ function playRound(humanChoice, computerChoice) {
         return(2);
     }
 }
+function playGame() {
+    let humanScore = 0;
+    let computerScore = 0;
+    for(i = 0; i < 5; i++) {
+        let score = playRound(getHumanChoice(), getComputerChoice());
 
-let humanScore = 0;
-let computerScore = 0;
-// let cc = getComputerChoice()
-// let hc = getHumanChoice();
-// console.log("Computer: ", cc);
-// console.log("You: ", hc);
+        if(score == 0) {
+            computerScore++;
+        } else if (score== 2){
+            humanScore++;
+        }
+    }
+    console.log("Your score: ", humanScore, "Computer score: ", computerScore);
+    if(humanScore > computerScore) {
+        console.log("You win!");
+    } else if(humanScore==computerScore) {
+        console.log("Draw!");
+    } else {
+        console.log("You lose!");
+    }
+    
+}
 
-let score = playRound(getHumanChoice(), getComputerChoice());
-
-if(score == 0) {
-    computerScore++;
-} else if (score== 2){
-    humanScore++;
-} 
+playGame();
 
 
