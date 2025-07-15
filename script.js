@@ -52,15 +52,18 @@ const computerScore = document.createElement("span");
 span1.textContent = "Your Score: ";
 span2.textContent = "Computer Score: ";
 humanScore.id = "hs";
-humanScore.value = "0";
+humanScore.value = 0;
 computerScore.id = "cs";
-computerScore.value = "0";
+computerScore.value = 0;
+humanScore.textContent= humanScore.value;
+computerScore.textContent = computerScore.value;
 // computerScore.style.content = "attr(value)";
 span1.appendChild(humanScore);
 span2.appendChild(computerScore);
 
-div2.appendChild(span2);
 div.appendChild(span1);
+div2.appendChild(span2);
+
 div.appendChild(div2);
 
 
@@ -71,10 +74,12 @@ rock.addEventListener("click", () => {
     let score = playRound("rock", getComputerChoice());
     if(score) {
         cs.value = ++cs.value;
+        cs.textContent = cs.value;
         // console.log(cs.value);
         // computerScore.value++;
     } else {
         hs.value = ++hs.value;
+        hs.textContent = hs.value;
         // document.querySelector("#hs").value++;
         // humanScore.value++;
     }
@@ -82,17 +87,29 @@ rock.addEventListener("click", () => {
 paper.addEventListener("click", () => {
     let score = playRound("paper", getComputerChoice());
     if(score) {
-        computerScore.value++;
+        cs.value = ++cs.value;
+        cs.textContent = cs.value;
+        // console.log(cs.value);
+        // computerScore.value++;
     } else {
-        humanScore.value++;
+        hs.value = ++hs.value;
+        hs.textContent = hs.value;
+        // document.querySelector("#hs").value++;
+        // humanScore.value++;
     }
 });
 scissors.addEventListener("click", () => {
     let score = playRound("scissors", getComputerChoice());
     if(score) {
-        computerScore.value++;
+        cs.value = ++cs.value;
+        cs.textContent = cs.value;
+        // console.log(cs.value);
+        // computerScore.value++;
     } else {
-        humanScore.value++;
+        hs.value = ++hs.value;
+        hs.textContent = hs.value;
+        // document.querySelector("#hs").value++;
+        // humanScore.value++;
     }
 });
 // div.textContent = "Human Score: " + humanScore + " " + "Computer Score: " + computerScore;
