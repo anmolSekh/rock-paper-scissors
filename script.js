@@ -27,29 +27,75 @@ function playRound(humanChoice, computerChoice) {
     console.log("Computer: ", computerChoice);
     if(humanChoice=="rock" & computerChoice=="paper" | humanChoice=="paper" & computerChoice=="scissors" | humanChoice=="scissors" & computerChoice=="rock") {
         console.log("You lose! ", computerChoice, " beats ", humanChoice);
-        return(0);
+        return true;
     } else if(humanChoice == computerChoice) {
         console.log("Draw!");
-        return(1);
+        // return(1);
     } else {
         console.log("You win! ", humanChoice, " beats ", computerChoice);
-        return(2);
+        return false;
     }
 }
-
+// let humanScore = 0;
+// let computerScore = 0;
 const rock = document.querySelector("#rock");
 const paper = document.querySelector("#paper");
 const scissors = document.querySelector("#scissors");
-const div = document.createElement("div");
+// const div = document.createElement("div");
+const div = document.querySelector("#results");
+const div2 = document.createElement("div");
+const span1 = document.createElement("span");
+const span2 = document.createElement("span");
+const humanScore = document.createElement("span");
+const computerScore = document.createElement("span");
+
+span1.textContent = "Your Score: ";
+span2.textContent = "Computer Score: ";
+humanScore.id = "hs";
+humanScore.value = "0";
+computerScore.id = "cs";
+computerScore.value = "0";
+// computerScore.style.content = "attr(value)";
+span1.appendChild(humanScore);
+span2.appendChild(computerScore);
+
+div2.appendChild(span2);
+div.appendChild(span1);
+div.appendChild(div2);
+
+
+// div.textContent
 rock.addEventListener("click", () => {
-    playRound("rock", getComputerChoice())
+    let cs = document.querySelector("#cs");
+    let hs = document.querySelector("#hs");
+    let score = playRound("rock", getComputerChoice());
+    if(score) {
+        cs.value = ++cs.value;
+        // console.log(cs.value);
+        // computerScore.value++;
+    } else {
+        hs.value = ++hs.value;
+        // document.querySelector("#hs").value++;
+        // humanScore.value++;
+    }
 });
 paper.addEventListener("click", () => {
-    playRound("paper", getComputerChoice())
+    let score = playRound("paper", getComputerChoice());
+    if(score) {
+        computerScore.value++;
+    } else {
+        humanScore.value++;
+    }
 });
 scissors.addEventListener("click", () => {
-    playRound("scissors", getComputerChoice())
+    let score = playRound("scissors", getComputerChoice());
+    if(score) {
+        computerScore.value++;
+    } else {
+        humanScore.value++;
+    }
 });
+// div.textContent = "Human Score: " + humanScore + " " + "Computer Score: " + computerScore;
 // div.appendChild(rock);
 // div.appendChild(paper);
 // div.appendChild(scissors);
