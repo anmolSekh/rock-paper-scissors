@@ -26,13 +26,13 @@ function playRound(humanChoice, computerChoice) {
     console.log("You: ", humanChoice);
     console.log("Computer: ", computerChoice);
     if(humanChoice=="rock" & computerChoice=="paper" | humanChoice=="paper" & computerChoice=="scissors" | humanChoice=="scissors" & computerChoice=="rock") {
-        console.log("You lose! ", computerChoice, " beats ", humanChoice);
+        // console.log("You lose! ", computerChoice, " beats ", humanChoice);
         return true;
     } else if(humanChoice == computerChoice) {
-        console.log("Draw!");
+        // console.log("Draw!");
         // return(1);
     } else {
-        console.log("You win! ", humanChoice, " beats ", computerChoice);
+        // console.log("You win! ", humanChoice, " beats ", computerChoice);
         return false;
     }
 }
@@ -43,12 +43,13 @@ const paper = document.querySelector("#paper");
 const scissors = document.querySelector("#scissors");
 // const div = document.createElement("div");
 const div = document.querySelector("#results");
+const div1 = document.createElement("div");
 const div2 = document.createElement("div");
 const span1 = document.createElement("span");
 const span2 = document.createElement("span");
 const humanScore = document.createElement("span");
 const computerScore = document.createElement("span");
-
+div.textContent = "First to X wins";
 span1.textContent = "Your Score: ";
 span2.textContent = "Computer Score: ";
 humanScore.id = "hs";
@@ -61,12 +62,13 @@ computerScore.textContent = computerScore.value;
 span1.appendChild(humanScore);
 span2.appendChild(computerScore);
 
-div.appendChild(span1);
+div1.appendChild(span1);
 div2.appendChild(span2);
 
+div.appendChild(div1);
 div.appendChild(div2);
 
-
+//create scorekeep function
 // div.textContent
 rock.addEventListener("click", () => {
     let cs = document.querySelector("#cs");
@@ -85,6 +87,8 @@ rock.addEventListener("click", () => {
     }
 });
 paper.addEventListener("click", () => {
+    let cs = document.querySelector("#cs");
+    let hs = document.querySelector("#hs");
     let score = playRound("paper", getComputerChoice());
     if(score) {
         cs.value = ++cs.value;
@@ -99,6 +103,8 @@ paper.addEventListener("click", () => {
     }
 });
 scissors.addEventListener("click", () => {
+    let cs = document.querySelector("#cs");
+    let hs = document.querySelector("#hs");
     let score = playRound("scissors", getComputerChoice());
     if(score) {
         cs.value = ++cs.value;
