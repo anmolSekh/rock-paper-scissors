@@ -27,13 +27,54 @@ function playRound(humanChoice, computerChoice) {
     console.log("Computer: ", computerChoice);
     if(humanChoice=="rock" & computerChoice=="paper" | humanChoice=="paper" & computerChoice=="scissors" | humanChoice=="scissors" & computerChoice=="rock") {
         // console.log("You lose! ", computerChoice, " beats ", humanChoice);
-        return true;
+
+        return 0;
     } else if(humanChoice == computerChoice) {
         // console.log("Draw!");
-        // return(1);
+        return 2;
     } else {
         // console.log("You win! ", humanChoice, " beats ", computerChoice);
-        return false;
+        return 1;
+    }
+}
+
+function updateValues(humanChoice) {
+    let cs = document.querySelector("#cs");
+    let hs = document.querySelector("#hs");
+    let cc = document.querySelector("#cc");
+    let hc = document.querySelector("#hc");
+    let res = document.querySelector("#res");
+    let comp = getComputerChoice();
+    let score = playRound(humanChoice, comp);
+    cc.textContent = comp;
+    hc.textContent = humanChoice;
+    if(score == 0) {
+        cs.value = ++cs.value;
+        cs.textContent = cs.value;
+        res.textContent = "Lose!"
+        // console.log(cs.value);
+        // computerScore.value++;
+    } else if (score == 1) {
+        hs.value = ++hs.value;
+        hs.textContent = hs.value;
+        res.textContent = "Win!"
+        // document.querySelector("#hs").value++;
+        // humanScore.value++;
+    } else {
+        res.textContent = "Draw!";
+    }
+    if(cs.value == 5) {
+        res.textContent = "Game Winner: Computer!";
+        hs.value = 0;
+        cs.value = 0;
+        cs.textContent = cs.value;
+        hs.textContent = hs.value;
+    } else if (hs.value == 5) {
+        res.textContent = "Game Winner: Human!";
+        hs.value = 0;
+        cs.value = 0;
+        cs.textContent = cs.value;
+        hs.textContent = hs.value;
     }
 }
 // let humanScore = 0;
@@ -43,13 +84,44 @@ const paper = document.querySelector("#paper");
 const scissors = document.querySelector("#scissors");
 // const div = document.createElement("div");
 const div = document.querySelector("#results");
+const choices = document.createElement("div");
+const wl = document.createElement("div");
 const div1 = document.createElement("div");
 const div2 = document.createElement("div");
+const res = document.createElement("span");
+const hc = document.createElement("span");
+const cc = document.createElement("span");
 const span1 = document.createElement("span");
 const span2 = document.createElement("span");
 const humanScore = document.createElement("span");
 const computerScore = document.createElement("span");
-div.textContent = "First to X wins";
+
+
+res.id = "res";
+hc.id = "hc";
+cc.id = "cc";
+
+// wl.innerText += "Result: " + res.textContent;
+
+hc.textContent = "N/A";
+cc.textContent = "N/A";
+res.textContent = "No games played"; //win loss
+
+const human = document.createElement("span");
+const computer = document.createElement("span");
+// choices.textContent = "Player chose: " + hc + " Computer chose: " + cc + "\n";
+human.textContent = "Player chose: ";
+// choices.textContent = "Player chose: ";
+human.appendChild(hc);
+computer.textContent = " Computer chose: ";
+computer.appendChild(cc);
+choices.appendChild(human);
+choices.appendChild(computer);
+wl.textContent = "Results: "
+// res.textContent;
+wl.appendChild(res);
+
+div.textContent = "First to 5 wins";
 span1.textContent = "Your Score: ";
 span2.textContent = "Computer Score: ";
 humanScore.id = "hs";
@@ -64,59 +136,23 @@ span2.appendChild(computerScore);
 
 div1.appendChild(span1);
 div2.appendChild(span2);
-
+choices.appendChild(wl);
+// wl.appendChild(res);
+div.appendChild(choices);
 div.appendChild(div1);
 div.appendChild(div2);
+
 
 //create scorekeep function
 // div.textContent
 rock.addEventListener("click", () => {
-    let cs = document.querySelector("#cs");
-    let hs = document.querySelector("#hs");
-    let score = playRound("rock", getComputerChoice());
-    if(score) {
-        cs.value = ++cs.value;
-        cs.textContent = cs.value;
-        // console.log(cs.value);
-        // computerScore.value++;
-    } else {
-        hs.value = ++hs.value;
-        hs.textContent = hs.value;
-        // document.querySelector("#hs").value++;
-        // humanScore.value++;
-    }
+    updateValues("rock");
 });
 paper.addEventListener("click", () => {
-    let cs = document.querySelector("#cs");
-    let hs = document.querySelector("#hs");
-    let score = playRound("paper", getComputerChoice());
-    if(score) {
-        cs.value = ++cs.value;
-        cs.textContent = cs.value;
-        // console.log(cs.value);
-        // computerScore.value++;
-    } else {
-        hs.value = ++hs.value;
-        hs.textContent = hs.value;
-        // document.querySelector("#hs").value++;
-        // humanScore.value++;
-    }
+    updateValues("paper");
 });
 scissors.addEventListener("click", () => {
-    let cs = document.querySelector("#cs");
-    let hs = document.querySelector("#hs");
-    let score = playRound("scissors", getComputerChoice());
-    if(score) {
-        cs.value = ++cs.value;
-        cs.textContent = cs.value;
-        // console.log(cs.value);
-        // computerScore.value++;
-    } else {
-        hs.value = ++hs.value;
-        hs.textContent = hs.value;
-        // document.querySelector("#hs").value++;
-        // humanScore.value++;
-    }
+    updateValues("scissors");
 });
 // div.textContent = "Human Score: " + humanScore + " " + "Computer Score: " + computerScore;
 // div.appendChild(rock);
